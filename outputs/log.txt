@@ -1,0 +1,128 @@
+INFO:root:Computing for:040 V - No SC -----------
+INFO:root:I_coil =  19.98 A
+INFO:root:V_sensor:  13.15 mV
+INFO:root:B_s =  80.15 mT
+INFO:root:Computing for:080 V - No SC -----------
+INFO:root:I_coil =  39.35 A
+INFO:root:V_sensor:  25.79 mV
+INFO:root:B_s =  154.97 mT
+INFO:root:Computing for:120 V - No SC -----------
+INFO:root:I_coil =  59.49 A
+INFO:root:V_sensor:  38.08 mV
+INFO:root:B_s =  224.98 mT
+INFO:root:Computing for:120 V - SC -----------
+INFO:root:I_coil =  59.46 A
+INFO:root:V_sensor:  37.97 mV
+INFO:root:B_s =  223.44 mT
+INFO:root:Computing for:040 V - No SC -----------
+INFO:root:I_coil =  19.98 A
+INFO:root:V_sensor:  13.15 mV
+INFO:root:B_s =  80.15 mT
+INFO:root:Computing for:080 V - No SC -----------
+INFO:root:I_coil =  39.35 A
+INFO:root:V_sensor:  25.79 mV
+INFO:root:B_s =  154.97 mT
+INFO:root:Computing for:120 V - No SC -----------
+INFO:root:I_coil =  59.49 A
+INFO:root:V_sensor:  38.08 mV
+INFO:root:B_s =  224.98 mT
+INFO:root:Computing for:120 V - SC -----------
+INFO:root:I_coil =  59.46 A
+INFO:root:V_sensor:  37.97 mV
+INFO:root:B_s =  223.44 mT
+ Computing for:040 V - No SC -----------
+ I_coil =  19.98 A
+ V_sensor:  13.15 mV
+ B_s =  80.15 mT
+ Computing for:080 V - No SC -----------
+ I_coil =  39.35 A
+ V_sensor:  25.79 mV
+ B_s =  154.97 mT
+ Computing for:120 V - No SC -----------
+ I_coil =  59.49 A
+ V_sensor:  38.08 mV
+ B_s =  224.98 mT
+ Computing for:120 V - SC -----------
+ I_coil =  59.46 A
+ V_sensor:  37.97 mV
+ B_s =  223.44 mT
+Computing for:040 V - No SC -----------
+Applied voltage = 40
+I_coil =  19.98 A
+V_sensor:  13.15 mV
+B_s =  80.15 mT
+Computing for:080 V - No SC -----------
+Applied voltage = 80
+I_coil =  39.35 A
+V_sensor:  25.79 mV
+B_s =  154.97 mT
+Computing for:120 V - No SC -----------
+Applied voltage = 120
+I_coil =  59.49 A
+V_sensor:  38.08 mV
+B_s =  224.98 mT
+Computing for:120 V - SC -----------
+Applied voltage = 120
+I_coil =  59.46 A
+V_sensor:  37.97 mV
+B_s =  223.44 mT
+Computing for:040 V - No SC -----------
+Applied voltage = 40
+I_coil =  19.98 A
+V_sensor:  13.15 mV
+B_s =  80.15 mT
+Computing for:080 V - No SC -----------
+Applied voltage = 80
+I_coil =  39.35 A
+V_sensor:  25.79 mV
+B_s =  154.97 mT
+Computing for:120 V - No SC -----------
+Applied voltage = 120
+I_coil =  59.49 A
+V_sensor:  38.08 mV
+B_s =  224.98 mT
+Computing for:120 V - SC -----------
+Applied voltage = 120
+I_coil =  59.46 A
+V_sensor:  37.97 mV
+B_s =  223.44 mT
+Computing for:040 V - No SC -----------
+Applied voltage = 40
+I_coil =  19.98 A
+V_sensor:  13.15 mV
+B_s =  80.15 mT
+Computing for:080 V - No SC -----------
+Applied voltage = 80
+I_coil =  39.35 A
+V_sensor:  25.79 mV
+B_s =  154.97 mT
+Computing for:120 V - No SC -----------
+Applied voltage = 120
+I_coil =  59.49 A
+V_sensor:  38.08 mV
+B_s =  224.98 mT
+Computing for:120 V - SC -----------
+Applied voltage = 120
+I_coil =  59.46 A
+V_sensor:  37.97 mV
+B_s =  223.44 mT
+Computing for:040 V - No SC -----------
+Applied voltage = 40
+I_coil =  19.98 A
+V_sensor:  13.15 mV
+B_s =  80.15 mT
+Computing for:080 V - No SC -----------
+Applied voltage = 80
+I_coil =  39.35 A
+V_sensor:  25.79 mV
+B_s =  154.97 mT
+Computing for:120 V - No SC -----------
+Applied voltage = 120
+I_coil =  59.49 A
+V_sensor:  38.08 mV
+B_s =  224.98 mT
+Computing for:120 V - SC -----------
+Applied voltage = 120
+I_coil =  59.46 A
+V_sensor:  37.97 mV
+B_s =  223.44 mT
