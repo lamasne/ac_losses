@@ -5,6 +5,26 @@ import os
 from globals import *
 import logging
 
+def compute_M(input_folder_SC, input_folder_no_SC, Vshunt_loss, err_scale_digitization):
+
+    Bs = compute_B(input_folder_SC, Vshunt_loss, err_scale_digitization)
+    Bapp = compute_B(input_folder_no_SC, Vshunt_loss, err_scale_digitization)
+    t, Bs_match, Bapp_match = match_x(Bs, Bapp)
+
+    M = 1/mu_0*(Bs_match - Bapp_match)
+
+    return [t, M]
+
+def match_x(y1,y2):
+    y1_fct = interp1d(y1[0], y1[1])
+    y2_fct = interp1d(y2[0], y2[1])
+
+    x_min = max([min(y1[0]), min(y2[0])])
+    x_max = min([max(y1[0]), max(y2[0])])
+    x = np.linspace(x_min, x_max, resol)
+
+    return(x, y1_fct(x), y2_fct(x))
+
 def compute_B(input_folder, Vshunt_loss, err_scale_digitization):
     Vs_raw, Vshunt_raw = get_data(input_folder, Vshunt_loss, err_scale_digitization)
     Vs = format_data(Vs_raw[0], Vs_raw[1])
@@ -12,18 +32,22 @@ def compute_B(input_folder, Vshunt_loss, err_scale_digitization):
     Icoil = Vshunt[1] * shunt_ratio  # Gain factor Vs --> Is
 
     flux_s = my_integrate(Vs[0], Vs[1])
-    B_s = flux_s / (N_s * S)
-    logging.info(
-        f"B_s = {(max(B_s)-min(B_s))/2 * 1000 : .2f} mT"
-    )
+    B_s = flux_s[1] / (N_s * S)
+
+    return [flux_s[0], B_s]
     
 def my_integrate(x, y):
     Y = np.zeros(len(x))
     for i in range(1, len(x)):
         Y[i] = Y[0] + np.trapz(y[0:i], x=x[0:i])
     Y = rm_offset(Y)
-    return Y
+    return [x, Y]
 
+def get_err_scale_digitization(voltage):
+    return 100 if voltage >= 120 else 200
+
+def get_Vshunt_loss(voltage):
+    return 200 if voltage >= 120 else 500
 
 def format_data(x, y):
     # returns clean array

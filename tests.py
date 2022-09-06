@@ -4,25 +4,54 @@ from globals import *
 import logging
 
 
-def test_hysteresis(filename, input_folder, Vshunt_loss, err_scale_digitization):
+def test_M(voltage, input_folder_SC, input_folder_no_SC, Vshunt_loss, err_scale_digitization):
+    B = compute_B(input_folder_no_SC, Vshunt_loss, err_scale_digitization)
+    M = compute_M(input_folder_SC, input_folder_no_SC, Vshunt_loss, err_scale_digitization)
+
+    logging.info(
+        f"M = {(max(M[1])-min(M[1]))/2 : .2f} H/m"
+    )
+
+    t, B_match, M_match = match_x(B, M)
+
+    fig, axs = plt.subplots(2)
+    axs[0].plot(t, M_match, "b")
+    axs[0].set_xlabel("t (s)")
+    axs[0].set_ylabel("M (H/m)", color="b")
+    ax1 = axs[0].twinx()
+    ax1.set_ylabel("B_s", color="r")
+    ax1.plot(t, B_match, "r")
+
+    axs[1].plot(B_match, M_match)
+    axs[1].set_xlabel("B_s (T)")
+    axs[1].set_ylabel("M (H/m)")
+
+    fig.suptitle(f'Test M: {voltage} V', fontsize=16)
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+
+
+def test_B(filename, input_folder, Vshunt_loss, err_scale_digitization):
     Vs_real, Vshunt_real = get_data(input_folder, Vshunt_loss, err_scale_digitization)
     Vs = format_data(Vs_real[0], Vs_real[1])
     V_shunt = format_data(Vshunt_real[0], Vshunt_real[1])
     Icoil = V_shunt[1] * shunt_ratio  # Gain factor Vs --> Is
     flux_s = my_integrate(Vs[0], Vs[1])
 
-    fig, ax = plt.subplots()
-    ax.plot(Icoil, flux_s)
-    ax.set_xlabel("I_coil (A)")
-    ax.set_ylabel("flux_sensor (V)")
+    Bs = compute_B(input_folder, Vshunt_loss, err_scale_digitization)  
+    logging.info(
+        f"B_s = {(max(Bs[1])-min(Bs[1]))/2 * 1000 : .2f} mT"
+    )
 
-    fig.suptitle('Test hysteresis: ' + filename, fontsize=16)
+    fig, ax = plt.subplots()
+    ax.plot(Icoil, Bs[1])
+    ax.set_xlabel("I_coil (A)")
+    ax.set_ylabel("B_s (T)")
+    fig.suptitle('Test B: ' + filename, fontsize=16)
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
     plt.savefig(
-        os.path.join(workspace, "outputs/test_hysteresis_" + filename + ".png")
+        os.path.join(workspace, "outputs/test_B_" + filename + ".png")
     )
-
 
 def test_integration(filename, input_folder, Vshunt_loss, err_scale_digitization):
     Vs_real, Vshunt_real = get_data(input_folder, Vshunt_loss, err_scale_digitization)
@@ -35,11 +64,11 @@ def test_integration(filename, input_folder, Vshunt_loss, err_scale_digitization
     fig, axs = plt.subplots(2)
 
     axs[0].set_ylabel("flux_sensor (V)", color="g")
-    axs[0].plot(Vs[0], flux_s, "g-", label="flux_sensor")
+    axs[0].plot(flux_s[0], flux_s[1], "g-", label="flux_sensor")
     ax1 = axs[0].twinx()
     ax1.set_ylabel("d/dt(phi_s)", color="k")
     ax1.plot(Vs[0], Vs[1], "r", label="V_s")
-    ax1.plot(Vs[0], np.gradient(flux_s, delta_t), "k--", label="d/dt(phi_s)")
+    ax1.plot(Vs[0], np.gradient(flux_s[1], delta_t), "k--", label="d/dt(phi_s)")
     axs[0].legend(loc="upper left")
     ax1.legend(loc="upper right")
 
@@ -47,7 +76,7 @@ def test_integration(filename, input_folder, Vshunt_loss, err_scale_digitization
     axs[1].plot(V_shunt[0], Icoil, "b-", label="I_coil")
     ax2 = axs[1].twinx()
     ax2.set_ylabel("flux_sensor (V)", color="g")
-    ax2.plot(Vs[0], flux_s * 1000, "g-", label="flux_sensor")
+    ax2.plot(flux_s[0], flux_s[1] * 1000, "g-", label="flux_sensor")
     axs[1].legend(loc="upper left")
     ax2.legend(loc="upper right")
 
